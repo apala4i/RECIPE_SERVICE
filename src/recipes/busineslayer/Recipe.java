@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.*;
@@ -41,6 +42,11 @@ public class Recipe {
     @ElementCollection
     List<String> directions;
 
+    @NotBlank
+    String category;
+
+    LocalDateTime date;
+
     @Override
     public String toString() {
         return "Recipe{" +
@@ -50,5 +56,13 @@ public class Recipe {
                 ", ingredients=" + ingredients +
                 ", directions=" + directions +
                 '}';
+    }
+
+    public void copyFields(Recipe recipe) {
+        setCategory(recipe.getCategory());
+        setDescription(recipe.getDescription());
+        setDirections(recipe.getDirections());
+        setIngredients(recipe.getIngredients());
+        setName(recipe.getName());
     }
 }
